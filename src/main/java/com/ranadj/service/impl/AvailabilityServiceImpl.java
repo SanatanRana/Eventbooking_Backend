@@ -25,7 +25,8 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public AvailabilityResponse checkAvailability(LocalDate date, LocalTime startTime, LocalTime endTime, Long adminId) {
+    public AvailabilityResponse checkAvailability(LocalDate date, LocalTime startTime, LocalTime endTime,
+            Long adminId) {
         // 1. Validate Date (must be today or in the future)
         if (date.isBefore(LocalDate.now())) {
             throw new ApiException("Event date must be today or in the future", HttpStatus.BAD_REQUEST);
@@ -39,7 +40,8 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         // 3. Query Database with indexed overlap search
         java.time.LocalDateTime startDateTime = date.atTime(startTime);
         java.time.LocalDateTime endDateTime = date.atTime(endTime);
-        boolean isOverlapping = bookingRepository.existsOverlappingConfirmedBooking(startDateTime, endDateTime, adminId, null);
+        boolean isOverlapping = bookingRepository.existsOverlappingConfirmedBooking(startDateTime, endDateTime, adminId,
+                null);
 
         if (isOverlapping) {
             return AvailabilityResponse.builder()
