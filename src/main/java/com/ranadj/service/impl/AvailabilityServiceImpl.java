@@ -37,7 +37,9 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         }
 
         // 3. Query Database with indexed overlap search
-        boolean isOverlapping = bookingRepository.existsOverlappingConfirmedBooking(date, startTime, endTime, adminId, null);
+        java.time.LocalDateTime startDateTime = date.atTime(startTime);
+        java.time.LocalDateTime endDateTime = date.atTime(endTime);
+        boolean isOverlapping = bookingRepository.existsOverlappingConfirmedBooking(startDateTime, endDateTime, adminId, null);
 
         if (isOverlapping) {
             return AvailabilityResponse.builder()
