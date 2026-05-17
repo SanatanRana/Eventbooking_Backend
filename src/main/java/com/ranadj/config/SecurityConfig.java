@@ -52,6 +52,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/availability/**").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/packages", "/api/packages/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/media/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/dj-owners").permitAll()
                 .requestMatchers("/api/test/public").permitAll()
                 .requestMatchers("/ws-booking/**").permitAll()
                 .anyRequest().authenticated()

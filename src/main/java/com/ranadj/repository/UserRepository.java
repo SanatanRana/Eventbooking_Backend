@@ -27,4 +27,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @return true if exists, false otherwise
      */
     boolean existsByEmail(String email);
+
+    /**
+     * Find all users with a specific role.
+     *
+     * @param role the user role
+     * @return list of users matching the role
+     */
+    java.util.List<User> findByRole(com.ranadj.entity.Role role);
 }
